@@ -45,3 +45,38 @@ xhr.open('GET', 'data/employees.json');
 xhr.send();
 
 
+
+var xhr1 = new XMLHttpRequest();
+
+xhr1.onreadystatechange = function () {
+    if(xhr1.readyState === 4) {
+        let rooms = JSON.parse(xhr1.responseText);
+        console.log(rooms);
+
+        var roomStatus = '<ul class="rooms">';
+        for(var i = 0; i < rooms.length; i += 1){
+            if(rooms[i].available === true) {
+                roomStatus += '<li class="empty">';
+               
+                
+            } else {
+                roomStatus += '<li class="full">';
+               
+            }
+            
+            roomStatus += rooms[i].room;
+            
+            
+
+            roomStatus += '</li>';
+        }
+            roomStatus += "</ul>";
+            document.getElementById('roomList').innerHTML = roomStatus;
+            console.log(roomStatus);
+
+    }
+} //end of room callback
+
+xhr1.open('GET', 'data/rooms.json');
+
+xhr1.send();
